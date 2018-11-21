@@ -18,26 +18,20 @@
 //   chart.draw();
 // });
 
-
-anychart.onDocumentReady(function () {
+function compareArray(array1, array2) {
   
-  var data = [
-    {x: 'basil', value: basil.winePairings.length}, // ingredient/wine and value would be the count of it's pairings
-    {x: 'lemon', value: lemon.winePairings.length},
-    {x: 'crab', value: crab.winePairings.length},
-    {x: 'A&B', value: 4}, // would be the shared pairings
-    {x: 'B&C', value: 5},
-    {x: 'A&C', value: 7},
-    {x: 'A&B&C', value: 1}
-  ];
+  const finalArray = [];
+  
+  array1.forEach((e1) => array2.forEach((e2) => {
+    if (e1 === e2) {
+      finalArray.push(e1)
+    }
+  }
+  ));
 
-  // Creates Venn chart.
-  var chart = anychart.venn(data);
+  return finalArray;
+};
 
-  chart.title('Create a Venn Chart');
-  chart.container('container');
-  chart.draw();
-});
 
 const basil = {
   winePairings: [
@@ -111,4 +105,27 @@ const crab = {
     'viognier',
   ]
 };
+
+
+anychart.onDocumentReady(function () {
+  
+  var data = [
+    {x: 'basil', value: basil.winePairings.length}, // A: ingredient/wine and value would be the count of it's pairings
+    {x: 'lemon', value: lemon.winePairings.length}, // B
+    {x: 'crab', value: crab.winePairings.length}, // C 
+    {x: 'basil&lemon', value: compareArray(basil.winePairings, lemon.winePairings).length}, // would be the shared pairings
+    {x: 'lemon&crab', value: compareArray(lemon.winePairings, crab.winePairings).length},
+    {x: 'basil&crab', value: compareArray(basil.winePairings, crab.winePairings).length},
+    {x: 'basil&lemon&crab', value: 1}
+  ];
+
+  // Creates Venn chart.
+  var chart = anychart.venn(data);
+
+  chart.title('Wine Pairings');
+  chart.container('container');
+  chart.draw();
+});
+
+
 
