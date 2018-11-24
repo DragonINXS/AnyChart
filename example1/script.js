@@ -110,12 +110,12 @@ const crab = {
 anychart.onDocumentReady(function () {
   
   var data = [
-    {x: 'basil', value: basil.winePairings.length}, // A: ingredient/wine and value would be the count of it's pairings
-    {x: 'lemon', value: lemon.winePairings.length}, // B
+    {x: 'basil', value: basil.winePairings.length, fill: "#47B428 0.75"}, // A: ingredient/wine and value would be the count of it's pairings
+    {x: 'lemon', value: lemon.winePairings.length, fill: "#E8D723 0.75"}, // B
     {x: 'crab', value: crab.winePairings.length}, // C 
-    {x: 'basil&lemon', value: compareArray(basil.winePairings, lemon.winePairings).length}, // would be the shared pairings
-    {x: 'lemon&crab', value: compareArray(lemon.winePairings, crab.winePairings).length},
-    {x: 'basil&crab', value: compareArray(basil.winePairings, crab.winePairings).length},
+    {x: 'basil&lemon', value: compareArray(basil.winePairings, lemon.winePairings).length, name: compareArray(lemon.winePairings, basil.winePairings)}, // would be the shared pairings
+    {x: 'lemon&crab', value: compareArray(lemon.winePairings, crab.winePairings).length, name: compareArray(lemon.winePairings, crab.winePairings)},
+    {x: 'basil&crab', value: compareArray(basil.winePairings, crab.winePairings).length, name: compareArray(basil.winePairings, crab.winePairings)},
     {x: 'basil&lemon&crab', value: 1}
   ];
 
